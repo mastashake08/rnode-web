@@ -1,0 +1,23 @@
+{
+  "name": "rnode-web",
+  "version": "1.0.0",
+  "description": "Browser-native Web Serial controller and Web Crypto layer for LoRa RNodes in KISS/TNC mode.",
+  "main": "index.js",
+  "type": "module",
+  "keywords": [
+    "rnode",
+    "webserial",
+    "kiss",
+    "tnc",
+    "lora",
+    "crypto",
+    "aes-gcm",
+    "amateur-radio"
+  ],
+  "author": "Jyrone Parker",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": ""
+  }
+}
