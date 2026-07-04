@@ -26,6 +26,6 @@ jobs:
       # The installation step is removed since the package has no dependencies
 
       - name: Publish to NPM Registry
-        run: npm publish --provenance
+        run: npm publish --provenance --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
