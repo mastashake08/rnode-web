@@ -268,13 +268,14 @@ export class RNodeController extends EventTarget {
    */
   async _processFrame(rawFrame) {
     const commandByte = rawFrame[0];
-    const portNumber = (commandByte >> 4) & 0x0F;
-    const commandId = commandByte & 0x0F;
     const payload = rawFrame.slice(1);
 
-    const eventMeta = { port: portNumber, commandId };
+    // RNode's extended status/config commands are flat full-byte codes
+    // (e.g. CMD_STAT_RSSI = 0x23), not port/command nibble pairs, so
+    // classification must match the whole byte rather than a masked nibble.
+    const eventMeta = { port: 0, commandId: commandByte };
 
-    switch (commandId) {
+    switch (commandByte) {
       case KISS.CMD_DATA:
         await this._handleIncomingData(payload, eventMeta);
         break;
