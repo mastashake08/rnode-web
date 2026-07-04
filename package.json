@@ -1,6 +1,6 @@
 {
   "name": "@mastashake08/rnode-web",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Browser-native Web Serial controller and Web Crypto layer for LoRa RNodes in KISS/TNC mode.",
   "main": "index.js",
   "type": "module",

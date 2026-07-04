@@ -12,9 +12,9 @@ const KISS = {
   CMD_DATA: 0x00,
   CMD_FREQUENCY: 0x01,
   CMD_BANDWIDTH: 0x02,
-  CMD_SPREADING_FACTOR: 0x03,
-  CMD_CODING_RATE: 0x04,
-  CMD_TX_POWER: 0x05
+  CMD_TX_POWER: 0x03,
+  CMD_SPREADING_FACTOR: 0x04,
+  CMD_CODING_RATE: 0x05
 };
 
 // Standard Nordic UART Service (NUS) UUIDs used by RNode BLE implementations
