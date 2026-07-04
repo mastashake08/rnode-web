@@ -95,7 +95,7 @@ export class RNodeController extends EventTarget {
         flowControl
       });
 
-      this.writer = this.port.output.getWriter();
+      this.writer = this.port.writable.getWriter();
       this.connectionType = 'serial';
       this.isReading = true;
       this._startSerialReadLoop();
@@ -182,9 +182,9 @@ export class RNodeController extends EventTarget {
    * Internal loop worker for keeping serial readers running asynchronously.
    */
   async _startSerialReadLoop() {
-    while (this.isReading && this.port && this.port.input) {
+    while (this.isReading && this.port && this.port.readable) {
       try {
-        this.reader = this.port.input.getReader();
+        this.reader = this.port.readable.getReader();
         while (this.isReading) {
           const { value, done } = await this.reader.read();
           if (done) break;
