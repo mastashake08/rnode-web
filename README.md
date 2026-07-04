@@ -1,7 +1,3 @@
-Here is a comprehensive, production-ready `README.md` for your package. It clearly documents the hybrid connection topology, the cryptographic pipelines, and the event-driven architecture so that anyone integration-testing your library can get up and running instantly.
-
----
-
 # rnode-web
 
 A browser-native, zero-dependency JavaScript library designed to interface directly with **LoRa RNodes** configured in **KISS/TNC mode**. By leveraging the modern **Web Serial** and **Web Bluetooth (BLE)** APIs, this package allows you to deploy client-side off-grid messaging apps, telemetry dashboards, or provisioning utilities straight from a standard web URL—completely free of local Python, `pip`, or compiled native driver toolchains.
@@ -25,14 +21,14 @@ It includes an integrated, hardware-accelerated encryption layer running on the 
 Install the package into your project via npm:
 
 ```bash
-npm install rnode-web
+npm install @mastashake08/rnode-web
 
 ```
 
 Or consume it directly in native browser modules using an ESM CDN:
 
 ```javascript
-import { RNodeController } from 'https://esm.sh/rnode-web';
+import { RNodeController } from '@mastashake08/rnode-web';
 
 ```
 
@@ -45,7 +41,7 @@ import { RNodeController } from 'https://esm.sh/rnode-web';
 The controller handles key derivation under the hood. You can seed the engine using a custom string passphrase or pass a cryptographically strong 32-byte binary array.
 
 ```javascript
-import { RNodeController } from 'rnode-web';
+import { RNodeController } from '@mastashake08/rnode-web';
 
 const rnode = new RNodeController();
 
