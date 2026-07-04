@@ -126,9 +126,8 @@ export class RNodeController extends EventTarget {
         optionalServices: [serviceUuid]
       });
 
-      const server = await this.bleDevice.gatt.connect();
-      const service = await server.getPrimaryService(serviceUuid);
-      
+      const service = await this._connectGattWithRetry(serviceUuid);
+
       this.rxCharacteristic = await service.getCharacteristic(rxUuid);
       this.txCharacteristic = await service.getCharacteristic(txUuid);
 
@@ -149,6 +148,29 @@ export class RNodeController extends EventTarget {
       this.dispatchEvent(new CustomEvent('error', { detail: error }));
       throw error;
     }
+  }
+
+  /**
+   * Connects the GATT server and fetches the primary service, retrying if the
+   * peripheral drops the connection before service discovery completes (a
+   * known Web Bluetooth quirk on first pairing with many BLE peripherals).
+   */
+  async _connectGattWithRetry(serviceUuid, maxAttempts = 3, retryDelayMs = 300) {
+    let lastError;
+    for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+      try {
+        const server = this.bleDevice.gatt.connected
+          ? this.bleDevice.gatt
+          : await this.bleDevice.gatt.connect();
+        return await server.getPrimaryService(serviceUuid);
+      } catch (error) {
+        lastError = error;
+        if (attempt < maxAttempts) {
+          await new Promise((resolve) => setTimeout(resolve, retryDelayMs));
+        }
+      }
+    }
+    throw lastError;
   }
 
   /**
